@@ -1,7 +1,5 @@
-import { useState } from 'react'
+import { WidgetButton } from "./components/WidgetButton";
 
-function App() {
-  return <h1 className='bg-violet-500'>Hello World</h1>
+export function App() {
+  return <WidgetButton />
 }
-
-export default App
