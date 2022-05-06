@@ -1,12 +1,13 @@
 import { useState } from "react";
 
-import { CloseButton } from "./CloseButton";
+import { CloseButton } from "../CloseButton";
 
-import bugImageUrl from "../assets/bug.svg"
-import ideaImageUrl from "../assets/idea.svg"
-import thoughtImageUrl from "../assets/thought.svg"
+import bugImageUrl from "../../assets/bug.svg"
+import ideaImageUrl from "../../assets/idea.svg"
+import thoughtImageUrl from "../../assets/thought.svg"
+import { SelectFeedbackTypeStep } from "./FeedbackSteps/SelectFeedbackTypeStep";
 
-const feedbackTypes = {
+export const feedbackTypes = {
     BUG: {
         title: 'Bug',
         image: {
@@ -33,12 +34,12 @@ const feedbackTypes = {
 //then later, using the method Object.entries(feedbackTypes) it will return an array of arrays, a vector = > [[BUG, {..content}], [IDEA, {..content}]..]
 
 //declare what types of feedback it is possible to return, using the keys of feedbackType object
-type feedbackType = keyof typeof feedbackTypes;
+export type FeedbackType = keyof typeof feedbackTypes;
 
 export function WidgetForm() {
 
     //Variable to store the type of feedback the user has chosen using react-state functionality: const ['state', 'function to toggle to state chosen']
-    const [feedbackType, setFeedbackType] = useState<feedbackType | null>(null)
+    const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
 
     return (
         <div className="bg-zinc-900 p-4 relative rounded-2xl mb-4 flex flex-col items-center shadow-lg w-[calc(100vw-2rem)] md:w-auto">
@@ -50,22 +51,9 @@ export function WidgetForm() {
 
             {/* If the feedback type has not been selected yet, display the buttons */}
             {! feedbackType ? (
-                <div className="flex py-8 gap-2 w-full">
                 
-                    { Object.entries(feedbackTypes).map(([key, value]) => {
-                        return (
-                            <button
-                                key={key}
-                                className="bg-zinc-800 rounded-lg py-5 w-24 flex-1 flex flex-col items-center gap-2 border-2 border-transparent hover:border-brand-500 focus:border-brand-500 focus:outline-none"
-                                onClick={() => setFeedbackType(key as feedbackType)}
-                                type="button"
-                            >
-                                <img src={value.image.source} alt={value.image.alt} />
-                                <span>{value.title}</span>
-                            </button>
-                        )
-                    })}
-                </div>
+                //call the component, exporting a prop with the function setFeedbackType
+                <SelectFeedbackTypeStep onFeedbackTypeChanged={setFeedbackType} />
 
             //else a feedback type has already been selected, display a new panel:
             ) : (
