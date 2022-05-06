@@ -6,6 +6,7 @@ import bugImageUrl from "../../assets/bug.svg"
 import ideaImageUrl from "../../assets/idea.svg"
 import thoughtImageUrl from "../../assets/thought.svg"
 import { SelectFeedbackTypeStep } from "./FeedbackSteps/SelectFeedbackTypeStep";
+import { FeedbackContentStep } from "./FeedbackSteps/FeedbackContentStep";
 
 export const feedbackTypes = {
     BUG: {
@@ -43,11 +44,6 @@ export function WidgetForm() {
 
     return (
         <div className="bg-zinc-900 p-4 relative rounded-2xl mb-4 flex flex-col items-center shadow-lg w-[calc(100vw-2rem)] md:w-auto">
-            <header>
-                <span className="text-xl leading-6">Leave feedback</span>
-
-                <CloseButton />
-            </header>
 
             {/* If the feedback type has not been selected yet, display the buttons */}
             {! feedbackType ? (
@@ -57,7 +53,9 @@ export function WidgetForm() {
 
             //else a feedback type has already been selected, display a new panel:
             ) : (
-                <p>Hello World</p>
+
+                //call component FeedbackContentStep, exporting which type of feedback the user has chosen, using a prop
+                <FeedbackContentStep feedbackType = {feedbackType}/>
             )}
 
             <footer className="text-xs text-neutral-400">
