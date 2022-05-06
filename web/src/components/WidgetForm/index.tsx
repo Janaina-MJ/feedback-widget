@@ -42,6 +42,10 @@ export function WidgetForm() {
     //Variable to store the type of feedback the user has chosen using react-state functionality: const ['state', 'function to toggle to state chosen']
     const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
 
+    function handleRestartFeedback() {
+        setFeedbackType(null);
+    }
+
     return (
         <div className="bg-zinc-900 p-4 relative rounded-2xl mb-4 flex flex-col items-center shadow-lg w-[calc(100vw-2rem)] md:w-auto">
 
@@ -55,7 +59,10 @@ export function WidgetForm() {
             ) : (
 
                 //call component FeedbackContentStep, exporting which type of feedback the user has chosen, using a prop
-                <FeedbackContentStep feedbackType = {feedbackType}/>
+                <FeedbackContentStep 
+                    feedbackType = {feedbackType}
+                    onFeedbackRestartRequested={handleRestartFeedback} 
+                />
             )}
 
             <footer className="text-xs text-neutral-400">
