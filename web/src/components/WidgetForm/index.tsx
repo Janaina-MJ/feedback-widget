@@ -7,6 +7,7 @@ import ideaImageUrl from "../../assets/idea.svg"
 import thoughtImageUrl from "../../assets/thought.svg"
 import { SelectFeedbackTypeStep } from "./FeedbackSteps/SelectFeedbackTypeStep";
 import { FeedbackContentStep } from "./FeedbackSteps/FeedbackContentStep";
+import { FeedbackSuccessStep } from "./FeedbackSteps/FeedbackSuccessStep";
 
 export const feedbackTypes = {
     BUG: {
@@ -42,27 +43,42 @@ export function WidgetForm() {
     //Variable to store the type of feedback the user has chosen using react-state functionality: const ['state', 'function to toggle to state chosen']
     const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
 
+    //store the feedback state (sent or not sent)
+    const [feedbackSent, setFeedbackSent] = useState(false);
+
     function handleRestartFeedback() {
+        setFeedbackSent(false);
         setFeedbackType(null);
     }
 
     return (
         <div className="bg-zinc-900 p-4 relative rounded-2xl mb-4 flex flex-col items-center shadow-lg w-[calc(100vw-2rem)] md:w-auto">
 
-            {/* If the feedback type has not been selected yet, display the buttons */}
-            {! feedbackType ? (
-                
-                //call the component, exporting a prop with the function setFeedbackType
-                <SelectFeedbackTypeStep onFeedbackTypeChanged={setFeedbackType} />
+            {/* If feedback has been sent, display 'successfully sent screen' component */}
+            { feedbackSent ? (
 
-            //else a feedback type has already been selected, display a new panel:
+                <FeedbackSuccessStep onFeedbackRestartRequested={handleRestartFeedback}/>
+
+            //else, display initial feedback screen
             ) : (
+                <>
+                    {/* If the feedback type has not been selected yet, display the buttons */}
+                    {! feedbackType ? (
+                        
+                        //call the component, exporting a prop with the function setFeedbackType
+                        <SelectFeedbackTypeStep onFeedbackTypeChanged={setFeedbackType} />
 
-                //call component FeedbackContentStep, exporting which type of feedback the user has chosen, using a prop
-                <FeedbackContentStep 
-                    feedbackType = {feedbackType}
-                    onFeedbackRestartRequested={handleRestartFeedback} 
-                />
+                    //else a feedback type has already been selected, display a new panel:
+                    ) : (
+
+                        //call component FeedbackContentStep, exporting which type of feedback the user has chosen, using a prop
+                        <FeedbackContentStep 
+                            feedbackType = {feedbackType}
+                            onFeedbackRestartRequested={handleRestartFeedback} 
+                            onFeedbackSent={() => {setFeedbackSent(true)}}
+                        />
+                    )}
+                </>
             )}
 
             <footer className="text-xs text-neutral-400">
