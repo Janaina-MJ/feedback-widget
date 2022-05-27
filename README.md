@@ -34,3 +34,47 @@ It works as follows: the user clicks on the feedback widget button, which will e
   - Prisma to provide an abstraction layer to write data to the database and work with relational database
   - SQLite database
   - Insomnia API Client for testing the REST API requests
+
+## Getting Started
+
+To clone and run this application, you'll need [Git](https://git-scm.com/), [Node.js](https://nodejs.org/) + [NPM](https://www.w3schools.com/whatis/whatis_npm.asp) installed on your computer.
+
+From your command line, clone this Github repository and install all the dependencies listed in the _package.json_ files:
+
+Server:
+
+```
+$ git clone https://github.com/Janaina-MJ/feedback-widget.git
+$ cd feedback-widget
+
+# From the project root folder access the 'server' folder
+$ cd server
+
+# Make a copy of '.env.example' to '.env' and set it with YOUR environment variables
+$ cp .env.example .env
+
+# Install the dependencies
+$ npm install
+
+# Start the server
+$ npm run dev
+```
+The server will be running on port:3333
+
+Then, after the server is running:
+
+Web:
+
+```
+# Go back to the project root folder and access the 'web' folder
+$ cd ..
+$ cd web
+
+# Install the dependencies
+$ npm install
+
+# Start the application
+$ npm run dev
+```
+
+The web app will be running in your browser on http://localhost:3000 
