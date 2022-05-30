@@ -19,7 +19,7 @@ It works as follows: the user clicks on the feedback widget button, which will e
   - Using Typescript language for static typing
   - Setting up Vite.js as building tool
   - Styling elements using the Tailwind CSS framework
-  - Uusing the Headless UI library, to promote accessibility in the web environment
+  - Using the Headless UI library, to promote accessibility in the web environment
   - Setting up a server environment
   - Setting up database
   - Sending emails from server using Nodemailer
