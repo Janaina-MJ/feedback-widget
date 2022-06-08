@@ -4,6 +4,9 @@ import { prisma } from './prisma';
 
 const app = express();
 
+var cors = require('cors');
+app.use(cors({origin: true, credentials: true}));
+
 /* Middleware */
 app.use(express.json());
 /* End of Middleware */
