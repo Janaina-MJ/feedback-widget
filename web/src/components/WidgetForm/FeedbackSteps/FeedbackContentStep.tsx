@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import { FeedbackType, feedbackTypes } from ".."
 import { api } from "../../../service/api";
 import { CloseButton } from "../../CloseButton"
+import { LoadingScreenshot } from "../../LoadingScreenshot";
 import { ScreenshotButton } from "../ScreenshotButton";
 
 interface FeedbackContentStepProps {
@@ -19,10 +20,14 @@ export function FeedbackContentStep({ feedbackType, onFeedbackRestartRequested, 
     //declare a state to store the feedback comment from text area
     const [comment, setComment] = useState('');
 
+    const [isSendingFeedback, setIsSendingFeedback] = useState(false);
+
     const feedbackTypeInfo = feedbackTypes[feedbackType];
 
     async function handleSubmitFeedback(event: FormEvent) {
         event.preventDefault();
+
+        setIsSendingFeedback(true);
 
         //console.log({
         //    screenshot,
@@ -34,6 +39,8 @@ export function FeedbackContentStep({ feedbackType, onFeedbackRestartRequested, 
             comment,
             screenshot,
         });
+
+        setIsSendingFeedback(false);
 
         onFeedbackSent();
     }
@@ -76,10 +83,10 @@ export function FeedbackContentStep({ feedbackType, onFeedbackRestartRequested, 
 
                     <button
                         type="submit"
-                        disabled={comment.length === 0}
+                        disabled={comment.length === 0 || isSendingFeedback}
                         className="p-2 bg-brand-500 rounded-md border-transparent flex-1 flex justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500 transition-colors disabled:opacity-50 disabled:hover:bg-brand-500"
                     >
-                        Send feedback
+                        { isSendingFeedback ? <LoadingScreenshot /> : 'Send feedback' }
                     </button>
                 </footer>
             </form>
