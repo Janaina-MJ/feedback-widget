@@ -10,6 +10,10 @@ This is a Single Page Application (SPA), which consists of a feedback widget dev
 
 It works as follows: the user clicks on the feedback widget button, which will expand a small integrated screen containing 3 buttons to choose the type of feedback that will be left (which are: BUG, IDEA, OTHER). When choosing one of these options, the next step will be a form screen for the user to leave a comment and also a browser screenshot button (the screenshot is automatically attached to the form without the user having to upload it). By clicking send, the application will send the feedback and the screenshot to the backend, where they will be saved in the database and sent by email to the website's developer team.
 
+## 👀 Check it Out:
+
+https://feedback-widget-tool.vercel.app
+
 ## Project Intro
 
 * Building a web app that allows users to leave feedback about the website or web app, whether it be BUG, IDEA or OTHER.
